@@ -9,18 +9,26 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let contentLoader = ContentLoader()
+    //let contentLoader = OfflineContentLoader()
+    let contentLoader = OnlineContentLoader()
     
     let cellReuseIdentifier = "cellReuseIdentifier"
     private(set) var items = [Video]()
 
-    @IBOutlet weak var videoTableView: UITableView!
+    @IBOutlet weak var videoTableView: UITableView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.items = self.contentLoader.allVideos()
+        videoTableView?.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
-        videoTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        //self.items = self.contentLoader.allVideos()
+        self.contentLoader.allVideos { [weak self] videos in
+            DispatchQueue.main.async {
+                self?.items = videos
+                self?.videoTableView?.reloadData()
+            }
+        }
     }
 }
 
