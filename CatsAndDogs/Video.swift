@@ -10,8 +10,5 @@ import Foundation
 
 struct Video {
     let title: String
-    
-    init(_ title: String) {
-        self.title = title
-    }
+    let company: String
 }

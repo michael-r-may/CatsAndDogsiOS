@@ -9,30 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let contentLoader = ContentLoader()
+    
     let cellReuseIdentifier = "cellReuseIdentifier"
-    let items = [
-        Video("Ágnes Vásárhelyi"),
-        Video("Michał Bendowski"),
-        Video("Jorge D. Ortiz-Fuentes"),
-        Video("Felix Krause"),
-        Video("Scott Alexander-Bown"),
-        Video("Eugenio Marletti"),
-        Video("Natasha Murashev"),
-        Video("Jasson Schrock"),
-        Video("Ash Furrow"),
-        Video("Adrian Catalan")
-    ]
+    private(set) var items = [Video]()
 
     @IBOutlet weak var videoTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.items = self.contentLoader.allVideos()
         
         videoTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
 }
 
 extension ViewController: UITableViewDelegate {
-    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -51,7 +43,6 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension UITableViewCell {
-    
     func bind(_ video: Video) {
         textLabel?.text = video.title
     }
