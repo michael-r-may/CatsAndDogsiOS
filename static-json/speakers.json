@@ -1,0 +1,15 @@
+{
+  "event": {
+    "speakers": [
+      {
+        "name":"Michael May",
+        "company":"wrisk"
+      },
+      {
+        "name":"Romain Piel",
+        "company":"Deliveroo"
+      }
+    ],
+    "title": "mce^4"
+  }
+}
