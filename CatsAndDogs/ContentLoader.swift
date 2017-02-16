@@ -64,7 +64,8 @@ class OnlineContentLoader {
     
     func allVideos(completion: @escaping ([Video])->()) {
         self.json() { json in
-            if let event = json?["event"] as? JSONDictionary, let speakers = event["speakers"] as? [JSONDictionary] {
+            if let event = json?["event"] as? JSONDictionary,
+                let speakers = event["speakers"] as? [JSONDictionary] {
                 let videos = speakers.flatMap { Video(json: $0) }
                 
                 completion(videos)
