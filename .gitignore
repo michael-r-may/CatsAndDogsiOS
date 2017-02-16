@@ -17,6 +17,10 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
+
+## IntelliJ 
+.idea/
+
 ## Other
 *.moved-aside
 *.xcuserstate
