@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		664763D71E4BBB2C009BD586 /* ContentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664763D61E4BBB2C009BD586 /* ContentLoader.swift */; };
-		664763DA1E4BBC1B009BD586 /* speakers.json in Resources */ = {isa = PBXBuildFile; fileRef = 664763D91E4BBC1B009BD586 /* speakers.json */; };
 		BDFB86F31E411AC000B487AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFB86F21E411AC000B487AB /* AppDelegate.swift */; };
 		BDFB86F51E411AC000B487AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFB86F41E411AC000B487AB /* ViewController.swift */; };
 		BDFB86F81E411AC000B487AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDFB86F61E411AC000B487AB /* Main.storyboard */; };
@@ -19,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		664763D61E4BBB2C009BD586 /* ContentLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoader.swift; sourceTree = "<group>"; };
-		664763D91E4BBC1B009BD586 /* speakers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = speakers.json; sourceTree = "<group>"; };
 		BDFB86EF1E411AC000B487AB /* CatsAndDogs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatsAndDogs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDFB86F21E411AC000B487AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDFB86F41E411AC000B487AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,14 +39,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		664763D81E4BBC1B009BD586 /* static-json */ = {
-			isa = PBXGroup;
-			children = (
-				664763D91E4BBC1B009BD586 /* speakers.json */,
-			);
-			path = "static-json";
-			sourceTree = SOURCE_ROOT;
-		};
 		BDFB86E61E411AC000B487AB = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +64,6 @@
 				BDFB87041E41250E00B487AB /* Video.swift */,
 				BDFB86F61E411AC000B487AB /* Main.storyboard */,
 				BDFB86F91E411AC000B487AB /* Assets.xcassets */,
-				664763D81E4BBC1B009BD586 /* static-json */,
 				BDFB86FB1E411AC000B487AB /* LaunchScreen.storyboard */,
 				BDFB86FE1E411AC000B487AB /* Info.plist */,
 			);
@@ -144,7 +133,6 @@
 				BDFB86FD1E411AC000B487AB /* LaunchScreen.storyboard in Resources */,
 				BDFB86FA1E411AC000B487AB /* Assets.xcassets in Resources */,
 				BDFB86F81E411AC000B487AB /* Main.storyboard in Resources */,
-				664763DA1E4BBC1B009BD586 /* speakers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

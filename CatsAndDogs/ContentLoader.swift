@@ -43,7 +43,7 @@ class OnlineContentLoader {
     let session = URLSession(configuration: .default)
     
     private func jsonDataFromURL(completion: @escaping (Data?)->()) {
-        let url = URL(string: "https://raw.githubusercontent.com/michael-r-may/CatsAndDogsiOS/master/static-json/speakers.json")
+        let url = URL(string: "https://catsanddogs-swift-server.herokuapp.com/schedule")
         
         let task = session.dataTask(with: url!) { (data, response, error) in
             completion(data)
