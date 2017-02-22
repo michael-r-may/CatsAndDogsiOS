@@ -1,82 +1,58 @@
 //
-//  Created by Developer on 2017/02/08.
-//  Copyright © 2017 Romain Piel. All rights reserved.
+//  Created on 2017/02/08.
+//  Copyright © 2017 Romain Piel and Michael May. All rights reserved.
 //
 
 import Foundation
 
-typealias JSONDictionary = [String : Any]
+typealias JSONDictionary = Dictionary<String, Any>
 
-class OfflineContentLoader {
-    private func jsonDataFromFile() -> Data? {
-        var jsonData : Data? = nil
-        
-        if let jsonContentPath = Bundle.main.path(forResource: "speakers", ofType: "json") {
-            jsonData = FileManager().contents(atPath: jsonContentPath)
-        }
+private extension Dictionary where Key : ExpressibleByStringLiteral {
+    var event : JSONDictionary? { return self["event"] as? JSONDictionary }
+    var speakers : [JSONDictionary] { return self["speakers"] as? [JSONDictionary] ?? [] }
+}
 
-        return jsonData
-    }
-    
-    private func json() -> JSONDictionary? {
-        var json: JSONDictionary? = nil
-        
-        if let jsonData = self.jsonDataFromFile() {
-            json = try! JSONSerialization.jsonObject(with: jsonData, options: []) as? JSONDictionary
-        }
-        
-        return json
-    }
-    
-    func allVideos() -> [Video] {
-        let json = self.json()
-        
-        if let event = json?["event"] as? JSONDictionary, let speakers = event["speakers"] as? [JSONDictionary] {
-            return speakers.flatMap { Video(json: $0) }
-        }
-        
-        return []
-    }
+private extension Array {
+    var videos : [Video] { return self.flatMap { Video(json: $0 as? JSONDictionary) } }
 }
 
 class OnlineContentLoader {
+    let url = URL(string: "https://catsanddogs-swift-server.herokuapp.com/schedule")
     let session = URLSession(configuration: .default)
-    
-    private func jsonDataFromURL(completion: @escaping (Data?)->()) {
-        let url = URL(string: "https://catsanddogs-swift-server.herokuapp.com/schedule")
-        
-        let task = session.dataTask(with: url!) { (data, response, error) in
-            completion(data)
-        }
-        
-        task.resume()
+
+    private func downloadSchedule(completion: @escaping (Data?)->()) {
+        session.dataTask(with: url!) { (data, _, _) in completion(data) }.resume()
     }
     
-    private func json(completion: @escaping (JSONDictionary?)->()){
-        self.jsonDataFromURL() { jsonData in
-            var json: JSONDictionary?
+    private func getSchedule(completion: @escaping (JSONDictionary?)->()){
+        self.downloadSchedule() { jsonData in
+            var scheduleDictionary: JSONDictionary?
+                
+            if let jsonData = jsonData { scheduleDictionary = try! JSONSerialization.jsonObject(with: jsonData, options: []) as? JSONDictionary }
             
-            if let jsonData = jsonData { json = try! JSONSerialization.jsonObject(with: jsonData, options: []) as? JSONDictionary }
-            
-            completion(json)
+            completion(scheduleDictionary)
         }
     }
     
     func allVideos(completion: @escaping ([Video])->()) {
-        self.json() { json in
-            if let event = json?["event"] as? JSONDictionary,
-                let speakers = event["speakers"] as? [JSONDictionary] {
-                let videos = speakers.flatMap { Video(json: $0) }
-                
-                completion(videos)
-            }
+        self.getSchedule() { schedule in
+            let videos = schedule?.event?.speakers.videos ?? []
+            
+            completion(videos)
         }
     }
 }
 
+private extension Dictionary  where Key : ExpressibleByStringLiteral {
+    var title : String { return self["name"] as? String ?? "<unknown>" }
+    var company : String { return self["company"] as? String ?? "<unknown>" }
+}
+
 extension Video {
-    init(json: JSONDictionary) {
-        self.title = json["name"] as? String ?? "<unknown>"
-        self.company = json["company"] as? String ?? "<unknown>"
+    init?(json: JSONDictionary?) {
+        guard let json = json else { return nil }
+        
+        self.title = json.title
+        self.company = json.company
     }
 }
