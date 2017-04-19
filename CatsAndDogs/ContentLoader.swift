@@ -8,13 +8,7 @@ import Foundation
 typealias JSONDictionary = Dictionary<String, Any>
 
 private extension Array where Element : ExpressibleByDictionaryLiteral {
-    //typealias Element = JSONDictionary
-    
-    func items() -> [Item] {
-        return self.flatMap { Item(json: $0 as? JSONDictionary) }
-    }
-    
-//    var items: [Item] {  }
+    var items: [Item] { return self.flatMap { Item(json: $0 as? JSONDictionary) } }
 }
 
 private extension Data {
@@ -31,7 +25,7 @@ class OnlineContentLoader {
     
     func allItems(completion: @escaping ([Item])->()){
         self.downloadSchedule() { jsonData in
-            let items = jsonData?.jsonArray?.items() ?? []
+            let items = jsonData?.jsonArray?.items ?? []
             
             completion(items)
         }

@@ -12,7 +12,9 @@ class ItemCell: UITableViewCell {
     @IBOutlet fileprivate var time: UILabel!
     @IBOutlet fileprivate var title: UILabel!
     @IBOutlet fileprivate var subtitle: UILabel!
+}
 
+extension ItemCell {
     func bound(with item: Item) -> ItemCell {
         self.date?.text = item.date
         self.time?.text = item.time

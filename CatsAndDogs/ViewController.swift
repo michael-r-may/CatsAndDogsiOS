@@ -18,8 +18,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //tableView?.register(ItemCell.self, forCellReuseIdentifier: ItemCell.CellReuseIdentifier)
-        
         self.contentLoader.allItems { [weak self] items in
             DispatchQueue.main.async {
                 self?.items = items
