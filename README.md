@@ -8,3 +8,7 @@ This is the Swift 3.0 (for iOS) version of the cats and dogs app example code. I
 * https://github.com/michael-r-may/CatsAndDogsiOS
 * https://github.com/RomainPiel/CatsAndDogs-Android
 
+## Useful Links
+* http://kotlinlang.org
+* http://swift.org
+* http://samnewman.io/patterns/architectural/bff/
