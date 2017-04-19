@@ -7,52 +7,33 @@ import Foundation
 
 typealias JSONDictionary = Dictionary<String, Any>
 
-private extension Dictionary where Key : ExpressibleByStringLiteral {
-    var event : JSONDictionary? { return self["event"] as? JSONDictionary }
-    var speakers : [JSONDictionary] { return self["speakers"] as? [JSONDictionary] ?? [] }
+private extension Array where Element : ExpressibleByDictionaryLiteral {
+    //typealias Element = JSONDictionary
+    
+    func items() -> [Item] {
+        return self.flatMap { Item(json: $0 as? JSONDictionary) }
+    }
+    
+//    var items: [Item] {  }
 }
 
-private extension Array {
-    var videos : [Video] { return self.flatMap { Video(json: $0 as? JSONDictionary) } }
+private extension Data {
+    var jsonArray: [JSONDictionary]? { return try! JSONSerialization.jsonObject(with: self, options: []) as? [JSONDictionary] }
 }
 
 class OnlineContentLoader {
-    let url = URL(string: "https://catsanddogs-swift-server.herokuapp.com/schedule")
+    let url = URL(string: "https://catsanddogs-kotlin-bff.herokuapp.com/schedule.json?from=2017-05-08T12:00:00-02:00")
     let session = URLSession(configuration: .default)
 
     private func downloadSchedule(completion: @escaping (Data?)->()) {
         session.dataTask(with: url!) { (data, _, _) in completion(data) }.resume()
     }
     
-    private func getSchedule(completion: @escaping (JSONDictionary?)->()){
+    func allItems(completion: @escaping ([Item])->()){
         self.downloadSchedule() { jsonData in
-            var scheduleDictionary: JSONDictionary?
-                
-            if let jsonData = jsonData { scheduleDictionary = try! JSONSerialization.jsonObject(with: jsonData, options: []) as? JSONDictionary }
+            let items = jsonData?.jsonArray?.items() ?? []
             
-            completion(scheduleDictionary)
+            completion(items)
         }
-    }
-    
-    func allVideos(completion: @escaping ([Video])->()) {
-        self.getSchedule() { schedule in
-            let videos = schedule?.event?.speakers.videos ?? []
-            
-            completion(videos)
-        }
-    }
-}
-
-private extension Dictionary  where Key : ExpressibleByStringLiteral {
-    var title : String { return self["name"] as? String ?? "<unknown>" }
-    var company : String { return self["company"] as? String ?? "<unknown>" }
-}
-
-extension Video {
-    init?(json: JSONDictionary?) {
-        guard let json = json else { return nil }
-        
-        self.title = json.title
-        self.company = json.company
     }
 }

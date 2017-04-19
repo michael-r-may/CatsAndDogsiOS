@@ -6,21 +6,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // outlets
+    @IBOutlet fileprivate var tableView: UITableView!
+    
+    // data repository
     let contentLoader = OnlineContentLoader()
     
-    private(set) var items = [Video]()
+    // local data copy
+    private(set) var items = [Item]()
 
-    @IBOutlet fileprivate weak var videoTableView: UITableView?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        videoTableView?.register(VideoEntryCell.self, forCellReuseIdentifier: VideoEntryCell.CellReuseIdentifier)
+        //tableView?.register(ItemCell.self, forCellReuseIdentifier: ItemCell.CellReuseIdentifier)
         
-        self.contentLoader.allVideos { [weak self] videos in
+        self.contentLoader.allItems { [weak self] items in
             DispatchQueue.main.async {
-                self?.items = videos
-                self?.videoTableView?.reloadData()
+                self?.items = items
+                self?.tableView?.reloadData()
             }
         }
     }
@@ -33,23 +36,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView
-                .dequeueReusableVideoCell(for: indexPath)
+                .dequeueReusableItemCell(for: indexPath)
                 .bound(with: items[indexPath.row])
     }
 }
 
 fileprivate extension UITableView {
-    func dequeueReusableVideoCell(for indexPath:IndexPath) -> VideoEntryCell {
-        return self.dequeueReusableCell(withIdentifier: VideoEntryCell.CellReuseIdentifier, for: indexPath) as! VideoEntryCell
+    func dequeueReusableItemCell(for indexPath:IndexPath) -> ItemCell {
+        return self.dequeueReusableCell(withIdentifier: ItemCell.CellReuseIdentifier, for: indexPath) as! ItemCell
     }
 }
 
-class VideoEntryCell : UITableViewCell {
-    static let CellReuseIdentifier = "VideoCellReuseIdentifier"
-
-    func bound(with video: Video) -> VideoEntryCell {
-        textLabel?.text = video.title
-        
-        return self
-    }
-}
