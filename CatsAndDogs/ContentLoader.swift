@@ -16,7 +16,7 @@ private extension Data {
 }
 
 class OnlineContentLoader {
-    let url = URL(string: "https://catsanddogs-kotlin-bff.herokuapp.com/schedule.json?from=2017-05-08T12:00:00-02:00")
+    let url = URL(string: "https://catsanddogs-kotlin-bff.herokuapp.com/kotlinconf/schedule.json")
     let session = URLSession(configuration: .default)
 
     private func downloadSchedule(completion: @escaping (Data?)->()) {
