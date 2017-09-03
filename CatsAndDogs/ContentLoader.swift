@@ -16,17 +16,24 @@ private extension Data {
 }
 
 class OnlineContentLoader {
-    let urlString = "https://catsanddogs-kotlin-bff.herokuapp.com/kotlinconf/schedule.json"
-    let session = URLSession(configuration: .default)
+    private let urlString = "https://catsanddogs-kotlin-bff.herokuapp.com/kotlinconf/schedule.json"
+    private let session = URLSession(configuration: .default)
 
     private func downloadSchedule(completion: @escaping (Data?)->()) {
-        if let url = URL(string: urlString) {
+        let urlRequest: URLRequest? = {
+            guard let url = URL(string: self.urlString) else { return nil }
+            
             var request = URLRequest(url: url)
+            
             if let language = Bundle.main.preferredLocalizations.first {
                 request.setValue("Accept-Language", forHTTPHeaderField: language)
             }
             
-            session.dataTask(with: request) { (data, _, _) in completion(data) }.resume()
+            return request
+        }()
+        
+        if let urlRequest = urlRequest {
+            session.dataTask(with: urlRequest) { (data, _, _) in completion(data) }.resume()
         }
     }
     

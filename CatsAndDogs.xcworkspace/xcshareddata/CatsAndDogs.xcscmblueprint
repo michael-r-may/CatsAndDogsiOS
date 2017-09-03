@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "48AD207E6604D1C7786D0C967A9E322B88CE3450",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "ADDA439B3E3D972DA52050773DFBA8BB6AC3ACCE" : 9223372036854775807,
+    "48AD207E6604D1C7786D0C967A9E322B88CE3450" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5AAE5BE3-FD86-4619-BF07-EC59E5DA6BF9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "ADDA439B3E3D972DA52050773DFBA8BB6AC3ACCE" : "CatsAndDogs-Swift-Server\/",
+    "48AD207E6604D1C7786D0C967A9E322B88CE3450" : "CatsAndDogsiOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CatsAndDogs",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CatsAndDogs.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:michael-r-may\/CatsAndDogsiOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48AD207E6604D1C7786D0C967A9E322B88CE3450"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:michael-r-may\/CatsAndDogs-Swift-Server.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ADDA439B3E3D972DA52050773DFBA8BB6AC3ACCE"
+    }
+  ]
+}
