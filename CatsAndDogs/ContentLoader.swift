@@ -25,9 +25,7 @@ class OnlineContentLoader {
             
             var request = URLRequest(url: url)
             
-            if let language = Bundle.main.preferredLocalizations.first {
-                request.setValue("Accept-Language", forHTTPHeaderField: language)
-            }
+            request.setValue("Accept-Language", forHTTPHeaderField: NSLocale.current.identifier )
             
             return request
         }()
