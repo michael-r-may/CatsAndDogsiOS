@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6605808B1F5C936800BB65CE /* RFC3339DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6605808A1F5C936800BB65CE /* RFC3339DateFormatter.swift */; };
 		664763D71E4BBB2C009BD586 /* ContentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664763D61E4BBB2C009BD586 /* ContentLoader.swift */; };
 		667DF2C11EA527380003A86F /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667DF2C01EA527380003A86F /* ItemCell.swift */; };
 		BDFB86F31E411AC000B487AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFB86F21E411AC000B487AB /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6605808A1F5C936800BB65CE /* RFC3339DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFC3339DateFormatter.swift; sourceTree = "<group>"; };
 		664763D61E4BBB2C009BD586 /* ContentLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoader.swift; sourceTree = "<group>"; };
 		667DF2C01EA527380003A86F /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		BDFB86EF1E411AC000B487AB /* CatsAndDogs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatsAndDogs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +65,7 @@
 				BDFB86F21E411AC000B487AB /* AppDelegate.swift */,
 				664763D61E4BBB2C009BD586 /* ContentLoader.swift */,
 				BDFB86F41E411AC000B487AB /* ViewController.swift */,
+				6605808A1F5C936800BB65CE /* RFC3339DateFormatter.swift */,
 				BDFB87041E41250E00B487AB /* Item.swift */,
 				667DF2C01EA527380003A86F /* ItemCell.swift */,
 				BDFB86F61E411AC000B487AB /* Main.storyboard */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				664763D71E4BBB2C009BD586 /* ContentLoader.swift in Sources */,
+				6605808B1F5C936800BB65CE /* RFC3339DateFormatter.swift in Sources */,
 				BDFB86F51E411AC000B487AB /* ViewController.swift in Sources */,
 				BDFB87051E41250E00B487AB /* Item.swift in Sources */,
 				BDFB86F31E411AC000B487AB /* AppDelegate.swift in Sources */,

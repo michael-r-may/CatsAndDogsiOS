@@ -21,13 +21,28 @@ class OnlineContentLoader {
 
     private func downloadSchedule(completion: @escaping (Data?)->()) {
         let urlRequest: URLRequest? = {
-            guard let url = URL(string: self.urlString) else { return nil }
+            guard var urlComponents = URLComponents(string: self.urlString) else { return nil }
             
-            var request = URLRequest(url: url)
+            let currentLocale = Locale.US
+            let currentTimeZone = TimeZone.California!
             
-            request.setValue("Accept-Language", forHTTPHeaderField: NSLocale.current.identifier )
+            let dateFormatter = RFC3339DateFormatter(locale: currentLocale,
+                                                     timezone: currentTimeZone)
+  
+            let dateConferenceStarts = dateFormatter.date(from: "2017-11-02T11:00:00-07:00")
+                        
+            let fromQuery = URLQueryItem(name: "from", value: dateFormatter.string(for: dateConferenceStarts))
+            urlComponents.queryItems = [fromQuery]
             
-            return request
+            if let url = urlComponents.url {
+                var request = URLRequest(url: url)
+                
+                request.setValue("Accept-Language", forHTTPHeaderField: currentLocale.identifier)
+                
+                return request
+            }
+            
+            return nil
         }()
         
         if let urlRequest = urlRequest {
