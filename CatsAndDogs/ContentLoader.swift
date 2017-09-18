@@ -16,11 +16,38 @@ private extension Data {
 }
 
 class OnlineContentLoader {
-    let url = URL(string: "https://catsanddogs-kotlin-bff.herokuapp.com/schedule.json?from=2017-05-08T12:00:00-02:00")
-    let session = URLSession(configuration: .default)
+    private let urlString = "https://catsanddogs-kotlin-bff.herokuapp.com/kotlinconf/schedule.json"
+    private let session = URLSession(configuration: .default)
 
     private func downloadSchedule(completion: @escaping (Data?)->()) {
-        session.dataTask(with: url!) { (data, _, _) in completion(data) }.resume()
+        let urlRequest: URLRequest? = {
+            guard var urlComponents = URLComponents(string: self.urlString) else { return nil }
+            
+            let currentLocale = Locale.US
+            let currentTimeZone = TimeZone.California!
+            
+            let dateFormatter = RFC3339DateFormatter(locale: currentLocale,
+                                                     timezone: currentTimeZone)
+  
+            let dateConferenceStarts = dateFormatter.date(from: "2017-11-02T11:00:00-07:00")
+                        
+            let fromQuery = URLQueryItem(name: "from", value: dateFormatter.string(for: dateConferenceStarts))
+            urlComponents.queryItems = [fromQuery]
+            
+            if let url = urlComponents.url {
+                var request = URLRequest(url: url)
+                
+                request.setValue("Accept-Language", forHTTPHeaderField: currentLocale.identifier)
+                
+                return request
+            }
+            
+            return nil
+        }()
+        
+        if let urlRequest = urlRequest {
+            session.dataTask(with: urlRequest) { (data, _, _) in completion(data) }.resume()
+        }
     }
     
     func allItems(completion: @escaping ([Item])->()){
