@@ -19,9 +19,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = NSLocalizedString("viewcontroller.title", comment: "")
-        
         self.activityIndicator.startAnimating()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 120
         
         self.contentLoader.allItems { [weak self] items in
             DispatchQueue.main.async {
