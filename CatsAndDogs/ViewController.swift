@@ -8,6 +8,7 @@ import UIKit
 class ViewController: UIViewController {
     // outlets
     @IBOutlet fileprivate var tableView: UITableView!
+    @IBOutlet fileprivate var activityIndicator: UIActivityIndicatorView!
     
     // data repository
     let contentLoader = OnlineContentLoader()
@@ -18,12 +19,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.activityIndicator.startAnimating()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 120
+        
         self.contentLoader.allItems { [weak self] items in
             DispatchQueue.main.async {
-                self?.items = items
-                self?.tableView?.reloadData()
+                guard let strongSelf = self else { return }
+                
+                strongSelf.items = items
+                strongSelf.tableView?.reloadData()
+                strongSelf.activityIndicator.stopAnimating()
             }
         }
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
     }
 }
 
